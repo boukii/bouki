@@ -235,7 +235,7 @@ class _IA(_Player):
 			total += 1
 		return total
 
-class TestCasses(unittest.TestCase)
+class TestCasses(unittest.TestCase):
 
 	def setUp(self):
 		self.letsPlayT = LetsPlay()
@@ -433,7 +433,7 @@ class TestIACasses(unittest.TestCase):
 		]
 		self.assertEqual(self.letsPlayT.players[1]._find_streak(boardT,iJugadores[1], 4),1)
 
-	def test_ia_intelligence_1(self)
+	def test_ia_intelligence_1(self):
 		boardT = [
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
