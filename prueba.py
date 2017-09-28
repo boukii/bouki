@@ -347,9 +347,14 @@ class _IA(_Player):
 				print (board[i][j])
 				print (currentPlayer)
 				if board[i][j] == currentPlayer:
-					count += self._find_vertical_streak(i, j, board, streak)
-					count += self._find_horizontal_streak(i, j, board, streak)
-					count += self._find_diagonal_streak(i, j, board, streak)
+					count += self.test_check_vertical_right(i, j, board, streak)
+					count += self.test_check_vertical_left(i, j, board, streak)
+					count += self.test_check_horizontal_up(i, j, board, streak)
+					count += self.test_check_horizontal_down(i, j, board, streak)
+					count += self.test_check_diagonal_left_down(i, j, board, streak)
+					count += self.test_check_diagonal_left_up(i, j, board, streak)
+					count += self.test_check_diagonal_right_down(i, j, board, streak)
+					count += self.test_check_diagonal_right_up(i, j, board, streak)
 		return count
 
 	def _find_vertical_streak(self, row, column, board, streak):
@@ -412,9 +417,9 @@ class TestCasses(unittest.TestCase):
 
 	def test_check_vertical_right(self):
 		boardT = [
-			[CONNECT_FOUR_COLORS[0],0,0,0,0,0,0],
-			[CONNECT_FOUR_COLORS[0],CONNECT_FOUR_COLORS[0],0,0,0,0,0],
-			[CONNECT_FOUR_COLORS[0],0,0,0,0,0,0],
+			[iJugadores[0],0,0,0,0,0,0],
+			[iJugadores[0],iJugadores[0],0,0,0,0,0],
+			[iJugadores[0],0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0]
@@ -424,9 +429,9 @@ class TestCasses(unittest.TestCase):
 
 	def test_check_vertical_left(self):
 		boardT = [
-			[0,0,0,0,0,0,CONNECT_FOUR_COLORS[0]],
-			[0,0,0,0,0,CONNECT_FOUR_COLORS[0],CONNECT_FOUR_COLORS[0]],
-			[0,0,0,0,0,0,CONNECT_FOUR_COLORS[0]],
+			[0,0,0,0,0,0,iJugadores[0]],
+			[0,0,0,0,0,iJugadores[0],iJugadores[0]],
+			[0,0,0,0,0,0,iJugadores[0]],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0]
@@ -436,8 +441,8 @@ class TestCasses(unittest.TestCase):
 
 	def test_check_horizontal_up(self):
 		boardT = [
-			[CONNECT_FOUR_COLORS[0],CONNECT_FOUR_COLORS[0],CONNECT_FOUR_COLORS[0],0,0,0,0],
-			[0,CONNECT_FOUR_COLORS[0],0,0,0,0,0],
+			[iJugadores[0],iJugadores[0],iJugadores[0],0,0,0,0],
+			[0,iJugadores[0],0,0,0,0,0],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
@@ -452,8 +457,8 @@ class TestCasses(unittest.TestCase):
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
-			[0,CONNECT_FOUR_COLORS[0],0,0,0,0,0],
-			[CONNECT_FOUR_COLORS[0], CONNECT_FOUR_COLORS[0], CONNECT_FOUR_COLORS[0],0,0,0,0]
+			[0,iJugadores[0],0,0,0,0,0],
+			[iJugadores[0], iJugadores[0], iJugadores[0],0,0,0,0]
 		]
 		self.letsPlayT.board = boardT
 		self.assertEqual(self.letsPlayT._is_connect_four(), True)
@@ -463,18 +468,18 @@ class TestCasses(unittest.TestCase):
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
-			[CONNECT_FOUR_COLORS[0],0,CONNECT_FOUR_COLORS[0],0,0,0,0],
-			[0, CONNECT_FOUR_COLORS[0],0,0,0,0,0],
-			[CONNECT_FOUR_COLORS[0],0,0,0,0,0,0]
+			[iJugadores[0],0,iJugadores[0],0,0,0,0],
+			[0, iJugadores[0],0,0,0,0,0],
+			[iJugadores[0],0,0,0,0,0,0]
 		]
 		self.letsPlayT.board = boardT
 		self.assertEqual(self.letsPlayT._is_connect_four(), True)
 
 	def test_check_diagonal_left_up(self):
 		boardT = [
-			[CONNECT_FOUR_COLORS[0],0,0,0,0,0,0],
-			[0,CONNECT_FOUR_COLORS[0],0,0,0,0,0],
-			[CONNECT_FOUR_COLORS[0],0,CONNECT_FOUR_COLORS[0],0,0,0,0],
+			[iJugadores[0],0,0,0,0,0,0],
+			[0,iJugadores[0],0,0,0,0,0],
+			[iJugadores[0],0,iJugadores[0],0,0,0,0],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0]
@@ -487,9 +492,9 @@ class TestCasses(unittest.TestCase):
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,CONNECT_FOUR_COLORS[0]],
-			[0,0,0,0,0,CONNECT_FOUR_COLORS[0],0],
-			[0,0,0,0,CONNECT_FOUR_COLORS[0],0,CONNECT_FOUR_COLORS[0]]
+			[0,0,0,0,0,0,iJugadores[0]],
+			[0,0,0,0,0,iJugadores[0],0],
+			[0,0,0,0,iJugadores[0],0,iJugadores[0]]
 		]
 		self.letsPlayT.board = boardT
 		self.assertEqual(self.letsPlayT._is_connect_four(), True)
@@ -499,9 +504,9 @@ class TestCasses(unittest.TestCase):
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
-			[0,0,0,0,CONNECT_FOUR_COLORS[0],0,CONNECT_FOUR_COLORS[0]],
-			[0,0,0,0,0,CONNECT_FOUR_COLORS[0],0],
-			[0,0,0,0,0,0,CONNECT_FOUR_COLORS[0]]
+			[0,0,0,0,iJugadores[0],0,iJugadores[0]],
+			[0,0,0,0,0,iJugadores[0],0],
+			[0,0,0,0,0,0,iJugadores[0]]
 		]
 		self.letsPlayT.board = boardT
 		self.assertEqual(self.letsPlayT._is_connect_four(), True)
@@ -516,9 +521,9 @@ class TestIACasses(unittest.TestCase):
 
 	def test_check_vertical_right(self):
 		boardT = [
-			[CONNECT_FOUR_COLORS[0],0,0,0,0,0,0],
-			[CONNECT_FOUR_COLORS[0],CONNECT_FOUR_COLORS[0],0,0,0,0,0],
-			[CONNECT_FOUR_COLORS[0],0,0,0,0,0,0],
+			[iJugadores[0],0,0,0,0,0,0],
+			[iJugadores[0],iJugadores[0],0,0,0,0,0],
+			[iJugadores[0],0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0]
@@ -527,9 +532,9 @@ class TestIACasses(unittest.TestCase):
 
 	def test_check_vertical_left(self):
 		boardT = [
-			[0,0,0,0,0,0,CONNECT_FOUR_COLORS[0]],
-			[0,0,0,0,0,CONNECT_FOUR_COLORS[0],CONNECT_FOUR_COLORS[0]],
-			[0,0,0,0,0,0,CONNECT_FOUR_COLORS[0]],
+			[0,0,0,0,0,0,iJugadores[0]],
+			[0,0,0,0,0,iJugadores[0],iJugadores[0]],
+			[0,0,0,0,0,0,iJugadores[0]],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0]
@@ -539,8 +544,8 @@ class TestIACasses(unittest.TestCase):
 
 	def test_check_horizontal_up(self):
 		boardT = [
-			[CONNECT_FOUR_COLORS[0],CONNECT_FOUR_COLORS[0],CONNECT_FOUR_COLORS[0],0,0,0,0],
-			[0,CONNECT_FOUR_COLORS[0],0,0,0,0,0],
+			[iJugadores[0],iJugadores[0],iJugadores[0],0,0,0,0],
+			[0,iJugadores[0],0,0,0,0,0],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
@@ -554,8 +559,8 @@ class TestIACasses(unittest.TestCase):
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
-			[0,CONNECT_FOUR_COLORS[0],0,0,0,0,0],
-			[CONNECT_FOUR_COLORS[0], CONNECT_FOUR_COLORS[0], CONNECT_FOUR_COLORS[0],0,0,0,0]
+			[0,iJugadores[0],0,0,0,0,0],
+			[iJugadores[0], iJugadores[0], iJugadores[0],0,0,0,0]
 		]
 		self.assertEqual(self.letsPlayT.players[1]._find_streak(boardT,iJugadores[1], 4),1)
 
@@ -564,17 +569,17 @@ class TestIACasses(unittest.TestCase):
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
-			[CONNECT_FOUR_COLORS[0],0,CONNECT_FOUR_COLORS[0],0,0,0,0],
-			[0, CONNECT_FOUR_COLORS[0],0,0,0,0,0],
-			[CONNECT_FOUR_COLORS[0],0,0,0,0,0,0]
+			[iJugadores[0],0,iJugadores[0],0,0,0,0],
+			[0, iJugadores[0],0,0,0,0,0],
+			[iJugadores[0],0,0,0,0,0,0]
 		]
 		self.assertEqual(self.letsPlayT.players[1]._find_streak(boardT,iJugadores[1], 4),1)
 
 	def test_check_diagonal_left_up(self):
 		boardT = [
-			[CONNECT_FOUR_COLORS[0],0,0,0,0,0,0],
-			[0,CONNECT_FOUR_COLORS[0],0,0,0,0,0],
-			[CONNECT_FOUR_COLORS[0],0,CONNECT_FOUR_COLORS[0],0,0,0,0],
+			[iJugadores[0],0,0,0,0,0,0],
+			[0,iJugadores[0],0,0,0,0,0],
+			[iJugadores[0],0,iJugadores[0],0,0,0,0],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0]
@@ -586,9 +591,9 @@ class TestIACasses(unittest.TestCase):
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,CONNECT_FOUR_COLORS[0]],
-			[0,0,0,0,0,CONNECT_FOUR_COLORS[0],0],
-			[0,0,0,0,CONNECT_FOUR_COLORS[0],0,CONNECT_FOUR_COLORS[0]]
+			[0,0,0,0,0,0,iJugadores[0]],
+			[0,0,0,0,0,iJugadores[0],0],
+			[0,0,0,0,iJugadores[0],0,iJugadores[0]]
 		]
 		self.assertEqual(self.letsPlayT.players[1]._find_streak(boardT,iJugadores[1], 4),1)
 
@@ -597,9 +602,9 @@ class TestIACasses(unittest.TestCase):
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
-			[0,0,0,0,CONNECT_FOUR_COLORS[0],0,CONNECT_FOUR_COLORS[0]],
-			[0,0,0,0,0,CONNECT_FOUR_COLORS[0],0],
-			[0,0,0,0,0,0,CONNECT_FOUR_COLORS[0]]
+			[0,0,0,0,iJugadores[0],0,iJugadores[0]],
+			[0,0,0,0,0,iJugadores[0],0],
+			[0,0,0,0,0,0,iJugadores[0]]
 		]
 		self.assertEqual(self.letsPlayT.players[1]._find_streak(boardT,iJugadores[1], 4),1)
 
@@ -607,12 +612,14 @@ class TestIACasses(unittest.TestCase):
 		boardT = [
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
-			[0,0, CONNECT_FOUR_COLORS[1], CONNECT_FOUR_COLORS[0],0,0,0],
-			[0, CONNECT_FOUR_COLORS[1], CONNECT_FOUR_COLORS[0], CONNECT_FOUR_COLORS[0],0,0,0],
-			[0, CONNECT_FOUR_COLORS[1], CONNECT_FOUR_COLORS[0], CONNECT_FOUR_COLORS[0],0,0,0],
-			[0, CONNECT_FOUR_COLORS[1], CONNECT_FOUR_COLORS[0], CONNECT_FOUR_COLORS[1], CONNECT_FOUR_COLORS[0], ' ', CONNECT_FOUR_COLORS[1]
+			[0,0, iJugadores[1], iJugadores[0],0,0,0],
+			[0, iJugadores[1], iJugadores[0], iJugadores[0],0,0,0],
+			[0, iJugadores[1], iJugadores[0], iJugadores[0],0,0,0],
+			[0, iJugadores[1], iJugadores[0], iJugadores[1], iJugadores[0], 0, iJugadores[1]]
+			[0, iJugadores[1], iJugadores[0], iJugadores[1], iJugadores[0], 0, iJugadores[1]]
 		]
 		self.assertEqual(self.letsPlayT.players[1].get_move(boardT), 1)
+		
 
 	def test_ia_intelligence_2(self):
 		boardT = [
@@ -629,10 +636,10 @@ class TestIACasses(unittest.TestCase):
 		boardT = [
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
-			[0,0, CONNECT_FOUR_COLORS[1],0,0,0,0],
-			[0, CONNECT_FOUR_COLORS[0], CONNECT_FOUR_COLORS[0], CONNECT_FOUR_COLORS[0],0,0,0],
-			[0, CONNECT_FOUR_COLORS[1], CONNECT_FOUR_COLORS[0], CONNECT_FOUR_COLORS[0],0,0, CONNECT_FOUR_COLORS[1]],
-			[0, CONNECT_FOUR_COLORS[1], CONNECT_FOUR_COLORS[0], CONNECT_FOUR_COLORS[1], CONNECT_FOUR_COLORS[0],0, CONNECT_FOUR_COLORS[1]]
+			[0,0, iJugadores[1],0,0,0,0],
+			[0, iJugadores[0], iJugadores[0], iJugadores[0],0,0,0],
+			[0, iJugadores[1], iJugadores[0], iJugadores[0],0,0, iJugadores[1]],
+			[0, iJugadores[1], iJugadores[0], iJugadores[1], iJugadores[0],0, iJugadores[1]]
 		]
 		self.assertEqual(self.letsPlayT.players[1].get_move(boardT), 1)
 
@@ -643,7 +650,7 @@ class TestIACasses(unittest.TestCase):
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0],
-			[CONNECT_FOUR_COLORS[0],0,0,0,0,0,0],
+			[iJugadores[0],0,0,0,0,0,0],
 		]
 		self.assertEqual(self.letsPlayT.players[1].get_move(boardT), 6)
 
