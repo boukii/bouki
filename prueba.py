@@ -615,8 +615,12 @@ class TestIACasses(unittest.TestCase):
 			[0,0, iJugadores[1], iJugadores[0],0,0,0],
 			[0, iJugadores[1], iJugadores[0], iJugadores[0],0,0,0],
 			[0, iJugadores[1], iJugadores[0], iJugadores[0],0,0,0],
+<<<<<<< HEAD
 			[0, iJugadores[1], iJugadores[0], iJugadores[1], iJugadores[0], 0, iJugadores[1]]
 			[0, iJugadores[1], iJugadores[0], iJugadores[1], iJugadores[0], 0, iJugadores[1]]
+=======
+			[0, iJugadores[1], iJugadores[0], iJugadores[1], iJugadores[0], 0, iJugadores[1]
+>>>>>>> b403fc567d1dbdafccd83d954a36dbbf98104154
 		]
 		self.assertEqual(self.letsPlayT.players[1].get_move(boardT), 1)
 		
